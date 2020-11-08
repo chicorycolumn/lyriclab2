@@ -33,9 +33,16 @@ class SongsList extends Component {
   };
 
   showLyricsModal = (artistName, trackName) => {
+    console.log("Will fetch lyrics for", { artistName, trackName });
+
     fetchLyrics(artistName, trackName).then((lyrics) => {
+      console.log("Lyrics came back as", { lyrics });
       this.setState({ lyrics });
     });
+  };
+
+  exitLyricsModal = () => {
+    this.setState({ lyrics: "" });
   };
 
   tableStructure = [
@@ -51,7 +58,10 @@ class SongsList extends Component {
     return (
       <div className={`${styles.mainDiv}`}>
         {this.state.lyrics.length ? (
-          <LyricsModal lyrics={this.state.lyrics} />
+          <LyricsModal
+            lyrics={this.state.lyrics}
+            exitLyricsModal={this.exitLyricsModal}
+          />
         ) : (
           ""
         )}
