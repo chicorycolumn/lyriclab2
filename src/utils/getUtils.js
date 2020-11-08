@@ -79,6 +79,7 @@ export const fetchLyrics = (artistName, trackName) => {
       },
     })
     .then((res) => {
+      console.log(res);
       return res.data;
     })
     .then((data) => {

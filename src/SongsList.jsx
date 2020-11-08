@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styles from "./css/SongsList.module.css";
 import { fetchLyrics } from "./utils/getUtils.js";
+import { convertMillisecondsToMinutes } from "./utils/formattingUtils.js";
 import LyricsModal from "./LyricsModal.jsx";
 
 class SongsList extends Component {
@@ -109,7 +110,9 @@ class SongsList extends Component {
                 >
                   <td>{song["trackName"]}</td>
                   <td>{song["collectionName"]}</td>
-                  <td>{song["trackTimeMillis"]}</td>
+                  <td>
+                    {convertMillisecondsToMinutes(song["trackTimeMillis"])}
+                  </td>
                 </tr>
               );
             })}

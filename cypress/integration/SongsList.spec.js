@@ -10,12 +10,12 @@ describe("Sorting the tracks of an artist", () => {
 
     cy.get('[data-testid="songRow"]').first();
 
-    cy.contains(231328);
+    cy.contains("3:51");
 
     cy.get('[data-testid="trackTimeMillisButton"]').click();
 
     cy.get('[data-testid="songRow"]').first();
 
-    cy.contains(528045);
+    cy.contains("8:48");
   });
 });
