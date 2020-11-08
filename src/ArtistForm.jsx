@@ -27,6 +27,7 @@ class ArtistForm extends Component {
 
     fetchArtists(artistName).then((artists) => {
       this.setState({ isLoading: false, artists });
+      this.props.setAppState({ songs: [] });
     });
   };
 
@@ -35,6 +36,12 @@ class ArtistForm extends Component {
 
     fetchSongs(artistName, artistId).then((songs) => {
       this.props.setAppState({ songs });
+      this.setState({
+        artistName: "",
+        submittedArtistName: "",
+        artists: [],
+        isLoading: false,
+      });
     });
   };
 

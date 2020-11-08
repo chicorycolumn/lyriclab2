@@ -18,7 +18,7 @@ class App extends Component {
           <h1>LyricLab</h1>
         </header>
         <ArtistForm setAppState={this.setAppState} />
-        {this.state.songs.length ? <SongsList /> : ""}
+        {this.state.songs.length ? <SongsList songs={this.state.songs} /> : ""}
       </div>
     );
   }
