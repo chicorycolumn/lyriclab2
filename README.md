@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+# SortCut
+
+## Description
+
+A simple React app where users can search musicians by name, and then retrieve a lists of their songs, and finally see lyrics for those songs.
+
+## Instructions
+
+You can download this repository and run the project locally by following these steps:
+
+1. Fork this repository by clicking the button labelled 'Fork' on the [project page](https://github.com/chicorycolumn/lyriclab.git).
+   <br/>
+   Copy the url of your forked copy of the repository, and run `git clone the_url_of_your_forked_copy` in a Terminal window on your computer, replacing the long underscored word with your url.
+   <br/>
+   If you are unsure, instructions on forking can be found [here](https://guides.github.com/activities/forking/) or [here](https://www.toolsqa.com/git/git-fork/), and cloning [here](https://www.wikihow.com/Clone-a-Repository-on-Github) or [here](https://www.howtogeek.com/451360/how-to-clone-a-github-repository/).
+
+2. Open the project in a code editor, and run `npm install` to install necessary packages. You may also need to install [Node.js](https://nodejs.org/en/) by running `npm install node.js`.
+
+3. Run `npm start` to open the project in development mode.
+   <br/>
+   Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Testing
 
-In the project directory, you can run:
+Run the command `npm run cy`. This will bring up the testing window. From here you can click the test files, and the tests should automatically run and show you the results.
 
-### `npm start`
+## Built with
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- [JavaScript](https://www.javascript.com/) - The primary coding language
+- [VisualStudioCode](https://code.visualstudio.com/) - The code editor
+- [React](https://reactjs.org/) - The frontend framework
+- [CSS Modules](https://github.com/css-modules/css-modules) - The design organisation system
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Self-appraisal
 
-### `npm test`
+Further work needed on this app:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- The lyrics API does not consistently return lyrics, especially if you click the same song again, after viewing the lyrics and then closing the modal. I should have investigated and troubleshooted this further. This is a critical issue.
 
-### `npm run build`
+- The CSS needs to be greatly improved. The lyrics display could benefit from being a separate panel that slides in from the side, rather than a crude overlay. The table is crowded together and needs to be made more accessible for visually impaired people.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- The app needs more immediate feedback in terms of telling the user when it is loading data, or waiting for a response from the API. I added this for the Artist Search - it will tell you that it is loading, and then either display or not display results, giving you feedback both ways. This needs to be implemented for all parts of the app, that is, searching for songs, and searching for lyrics. The user needs to be told whether lyrics simply weren't found, or whether they are being loaded and it is taking time.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- I found the iTunes API to yield more useful data than the MusicBrainz API. However, one issue with the former is that it lists different versions of the same song by the same artist (eg Live vs Studio) as separate tracks, which is redundant for a site that is primarily focused on giving lyrics to the user. In the last fifteen minutes I was building a formatting util that would condense different versions of tracks together into arrays, so Yellow Submarine (Live) and Yellow Submarine (Remastered) and Yellow Submarine (Original) would all appear as one listing. It would also give an average track length between the different versions.
