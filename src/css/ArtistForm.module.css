@@ -1,6 +1,7 @@
 .artistBox {
   height: 25px;
   list-style-type: none;
+  cursor: pointer;
 }
 
 .artistBox:hover {

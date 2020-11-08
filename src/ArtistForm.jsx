@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { fetchArtists } from "./utils/getUtils.js";
+import { fetchArtists, fetchSongs } from "./utils/getUtils.js";
 import styles from "./css/ArtistForm.module.css";
 
 class ArtistForm extends Component {
@@ -27,6 +27,14 @@ class ArtistForm extends Component {
 
     fetchArtists(artistName).then((artists) => {
       this.setState({ isLoading: false, artists });
+    });
+  };
+
+  handleArtistSelection = (artist) => {
+    let { artistName, artistId } = artist;
+
+    fetchSongs(artistName, artistId).then((songs) => {
+      this.props.setAppState({ songs });
     });
   };
 
@@ -59,6 +67,9 @@ class ArtistForm extends Component {
               {this.state.artists.map((artist) => {
                 return (
                   <li
+                    onClick={() => {
+                      this.handleArtistSelection(artist);
+                    }}
                     className={`${styles.artistBox}`}
                     key={`artist${artist.artistId}`}
                   >{`${artist.artistName} (${artist.primaryGenreName})`}</li>
