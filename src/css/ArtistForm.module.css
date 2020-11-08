@@ -1,0 +1,15 @@
+.artistBox {
+  height: 25px;
+  list-style-type: none;
+}
+
+.artistBox:hover {
+  color: blue;
+}
+
+.artistBox:nth-of-type(odd) {
+  background-color: rgb(240, 240, 240);
+}
+.artistBox:nth-of-type(even) {
+  background-color: rgb(245, 245, 245);
+}

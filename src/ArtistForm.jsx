@@ -59,13 +59,14 @@ class ArtistForm extends Component {
               {this.state.artists.map((artist) => {
                 return (
                   <li
+                    className={`${styles.artistBox}`}
                     key={`artist${artist.artistId}`}
                   >{`${artist.artistName} (${artist.primaryGenreName})`}</li>
                 );
               })}
             </ul>
           ) : (
-            <p>
+            <p data-testid="artistNameFeedbackDisplay">
               No artists by the name {this.state.submittedArtistName} were found
             </p>
           ))}
