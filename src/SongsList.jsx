@@ -7,7 +7,7 @@ class SongsList extends Component {
   state = {
     songs: [],
     currentlySortedBy: { key: "trackName", asc: true },
-    lyrics: [],
+    lyrics: "",
   };
 
   componentDidMount() {
@@ -34,7 +34,7 @@ class SongsList extends Component {
 
   showLyricsModal = (artistName, trackName) => {
     fetchLyrics(artistName, trackName).then((lyrics) => {
-      console.log(lyrics);
+      this.setState({ lyrics });
     });
   };
 

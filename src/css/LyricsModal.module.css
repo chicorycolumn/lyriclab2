@@ -1,0 +1,7 @@
+.modal {
+  border: black solid 5px;
+}
+
+.innerModal {
+  border: blue solid 5px;
+}
