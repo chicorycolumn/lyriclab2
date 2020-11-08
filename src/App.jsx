@@ -1,6 +1,7 @@
 import styles from "./css/App.module.css";
 import ArtistForm from "./ArtistForm.jsx";
 import SongsList from "./SongsList.jsx";
+import dogface from "./images/dogface01.png";
 
 import React, { Component } from "react";
 
@@ -15,6 +16,7 @@ class App extends Component {
     return (
       <div className={`${styles.App}`}>
         <header className={`${styles.AppHeader}`}>
+          <img className={`${styles.AppLogo}`} alt="logo" src={dogface} />
           <h1>LyricLab</h1>
         </header>
         <ArtistForm setAppState={this.setAppState} />
