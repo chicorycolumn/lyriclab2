@@ -1,7 +1,14 @@
 import React, { Component } from "react";
+import { fetchArtists } from "./utils/getUtils.js";
+import styles from "./css/ArtistForm.module.css";
 
 class ArtistForm extends Component {
-  state = { artistName: "", submittedArtistName: "" };
+  state = {
+    artistName: "",
+    submittedArtistName: "",
+    artists: [],
+    isLoading: false,
+  };
 
   handleFormChange = (event) => {
     this.setState({ artistName: event.target.value, submittedArtistName: "" });
@@ -12,7 +19,15 @@ class ArtistForm extends Component {
 
     let { artistName } = this.state;
 
-    this.setState({ artistName: "", submittedArtistName: artistName });
+    this.setState({
+      artistName: "",
+      submittedArtistName: artistName,
+      isLoading: true,
+    });
+
+    fetchArtists(artistName).then((artists) => {
+      this.setState({ isLoading: false, artists });
+    });
   };
 
   render() {
@@ -35,6 +50,25 @@ class ArtistForm extends Component {
         ) : (
           ""
         )}
+
+        {this.state.submittedArtistName &&
+          (this.state.isLoading ? (
+            <p>loading</p>
+          ) : this.state.artists.length ? (
+            <ul>
+              {this.state.artists.map((artist) => {
+                return (
+                  <li
+                    key={`artist${artist.artistId}`}
+                  >{`${artist.artistName} (${artist.primaryGenreName})`}</li>
+                );
+              })}
+            </ul>
+          ) : (
+            <p>
+              No artists by the name {this.state.submittedArtistName} were found
+            </p>
+          ))}
       </div>
     );
   }
