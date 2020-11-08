@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import styles from "./css/SongsList.module.css";
+import { fetchLyrics } from "./utils/getUtils.js";
+import LyricsModal from "./LyricsModal.jsx";
 
 class SongsList extends Component {
   state = {
     songs: [],
     currentlySortedBy: { key: "trackName", asc: true },
+    lyrics: [],
   };
 
   componentDidMount() {
@@ -29,6 +32,12 @@ class SongsList extends Component {
     });
   };
 
+  showLyricsModal = (artistName, trackName) => {
+    fetchLyrics(artistName, trackName).then((lyrics) => {
+      console.log(lyrics);
+    });
+  };
+
   tableStructure = [
     { key: "trackName", heading: "Track Name" },
     { key: "collectionName", heading: "Album" },
@@ -41,6 +50,12 @@ class SongsList extends Component {
   render() {
     return (
       <div className={`${styles.mainDiv}`}>
+        {this.state.lyrics.length ? (
+          <LyricsModal lyrics={this.state.lyrics} />
+        ) : (
+          ""
+        )}
+
         <h1 data-testid="songResultsHeading">
           Songs by {this.props.artistName}:
         </h1>
@@ -77,6 +92,10 @@ class SongsList extends Component {
                 <tr
                   className={`${styles.songRow}`}
                   key={`track${song["trackId"]}`}
+                  data-testid="songRow"
+                  onClick={() => {
+                    this.showLyricsModal(song.artistName, song.trackName);
+                  }}
                 >
                   <td>{song["trackName"]}</td>
                   <td>{song["collectionName"]}</td>

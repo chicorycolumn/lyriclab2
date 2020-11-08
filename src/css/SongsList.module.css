@@ -9,3 +9,15 @@
 .songRow:hover {
   color: blue;
 }
+
+.mainDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mainTable {
+  width: 90%;
+  max-width: 1000px;
+  margin-right: 10%;
+}
