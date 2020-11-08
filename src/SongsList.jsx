@@ -9,6 +9,7 @@ class SongsList extends Component {
     songs: [],
     currentlySortedBy: { key: "trackName", asc: true },
     lyrics: "",
+    currentModal: { artistName: "", trackName: "" },
   };
 
   componentDidMount() {
@@ -38,12 +39,15 @@ class SongsList extends Component {
 
     fetchLyrics(artistName, trackName).then((lyrics) => {
       console.log("Lyrics came back as", { lyrics });
-      this.setState({ lyrics });
+      this.setState({ lyrics, currentModal: { artistName, trackName } });
     });
   };
 
   exitLyricsModal = () => {
-    this.setState({ lyrics: "" });
+    this.setState({
+      lyrics: "",
+      currentModal: { artistName: "", trackName: "" },
+    });
   };
 
   tableStructure = [
@@ -62,6 +66,7 @@ class SongsList extends Component {
           <LyricsModal
             lyrics={this.state.lyrics}
             exitLyricsModal={this.exitLyricsModal}
+            currentModal={this.state.currentModal}
           />
         ) : (
           ""

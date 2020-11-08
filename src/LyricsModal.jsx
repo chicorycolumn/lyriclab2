@@ -10,9 +10,10 @@ class LyricsModal extends Component {
             onClick={this.props.exitLyricsModal}
             className={`${styles.exitButton}`}
           >
-            x
+            &times;
           </button>
           <div className={`${styles.innerModal}`}>
+            <h1>{`${this.props.currentModal.trackName} by ${this.props.currentModal.artistName}`}</h1>
             {this.props.lyrics.split(/\r\n|\r|\n/).map((line) => {
               return <p>{line}</p>;
             })}
