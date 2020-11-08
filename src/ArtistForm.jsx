@@ -35,7 +35,7 @@ class ArtistForm extends Component {
     let { artistName, artistId } = artist;
 
     fetchSongs(artistName, artistId).then((songs) => {
-      this.props.setAppState({ songs });
+      this.props.setAppState({ songs, artistName });
       this.setState({
         artistName: "",
         submittedArtistName: "",
@@ -74,6 +74,7 @@ class ArtistForm extends Component {
               {this.state.artists.map((artist) => {
                 return (
                   <li
+                    data-testid="artistResult"
                     onClick={() => {
                       this.handleArtistSelection(artist);
                     }}

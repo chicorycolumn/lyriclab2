@@ -1,0 +1,11 @@
+.selectedTH {
+  background-color: palegreen;
+}
+
+.songRow {
+  cursor: pointer;
+}
+
+.songRow:hover {
+  color: blue;
+}

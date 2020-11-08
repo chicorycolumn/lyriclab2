@@ -5,7 +5,7 @@ import SongsList from "./SongsList.jsx";
 import React, { Component } from "react";
 
 class App extends Component {
-  state = { songs: [] };
+  state = { songs: [], artistName: "" };
 
   setAppState = (data) => {
     this.setState(data);
@@ -18,7 +18,14 @@ class App extends Component {
           <h1>LyricLab</h1>
         </header>
         <ArtistForm setAppState={this.setAppState} />
-        {this.state.songs.length ? <SongsList songs={this.state.songs} /> : ""}
+        {this.state.songs.length ? (
+          <SongsList
+            songs={this.state.songs}
+            artistName={this.state.artistName}
+          />
+        ) : (
+          ""
+        )}
       </div>
     );
   }
