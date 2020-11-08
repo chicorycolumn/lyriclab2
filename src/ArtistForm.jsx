@@ -9,7 +9,6 @@ class ArtistForm extends Component {
 
   handleSubmitForm = (event) => {
     event.preventDefault();
-    console.log(this.state.artistName);
 
     let { artistName } = this.state;
 
