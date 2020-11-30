@@ -1,4 +1,4 @@
-# SortCut
+# LyricLab 2
 
 ## Description
 
