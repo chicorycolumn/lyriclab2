@@ -1,18 +1,18 @@
 export const formatSongData = (songsOriginal) => {
-  let songs = songsOriginal.map((song) => {
+  const songs = songsOriginal.map((song) => {
     return { ...song };
   });
 
-  let organisedSongs = [];
+  const organisedSongs = [];
 
   songs.forEach((song) => {
-    let { trackName } = song;
+    const { trackName } = song;
 
     song.baseTrackName = /\s\(/.test(trackName)
       ? trackName.slice(0, trackName.indexOf(" ("))
       : trackName;
 
-    let matchingSongObjects = organisedSongs.filter((organisedSong) => {
+    const matchingSongObjects = organisedSongs.filter((organisedSong) => {
       return (
         organisedSong.baseTrackName &&
         organisedSong.baseTrackName.toLowerCase() ===
@@ -31,7 +31,7 @@ export const formatSongData = (songsOriginal) => {
   });
 
   organisedSongs.forEach((organisedSongObject) => {
-    let trackTimes = organisedSongObject.songVersions.map((song) => {
+    const trackTimes = organisedSongObject.songVersions.map((song) => {
       return song.trackTimeMillis;
     });
     organisedSongObject.averageTrackTimeMillis = trackTimes.length

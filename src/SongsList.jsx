@@ -13,8 +13,8 @@ class SongsList extends Component {
   };
 
   componentDidMount() {
-    let key = "trackName";
-    let asc = true;
+    const key = "trackName";
+    const asc = true;
     this.setState({
       songs: this.props.songs.sort((a, b) => (a[key] > b[key] ? 1 : -1)),
       currentlySortedBy: { key, asc },
@@ -23,7 +23,7 @@ class SongsList extends Component {
 
   sortBy = (key) => {
     this.setState((currentState) => {
-      let asc = !currentState.currentlySortedBy.asc;
+      const asc = !currentState.currentlySortedBy.asc;
 
       return {
         songs: currentState.songs.sort((a, b) =>
@@ -87,7 +87,7 @@ class SongsList extends Component {
                     key={`artistRow${index}`}
                     data-testid={`${key}Button`}
                     className={`${
-                      this.state.currentlySortedBy.key == key &&
+                      this.state.currentlySortedBy.key === key &&
                       styles.selectedTH
                     }`}
                     onClick={() => {
@@ -95,7 +95,7 @@ class SongsList extends Component {
                     }}
                   >
                     {heading}
-                    {this.state.currentlySortedBy.key == key &&
+                    {this.state.currentlySortedBy.key === key &&
                       (this.state.currentlySortedBy.asc ? "▼" : "▲")}
                   </th>
                 );

@@ -17,7 +17,7 @@ class ArtistForm extends Component {
   handleSubmitForm = (event) => {
     event.preventDefault();
 
-    let { artistName } = this.state;
+    const { artistName } = this.state;
 
     this.setState({
       artistName: "",
@@ -32,7 +32,7 @@ class ArtistForm extends Component {
   };
 
   handleArtistSelection = (artist) => {
-    let { artistName, artistId } = artist;
+    const { artistName, artistId } = artist;
 
     fetchSongs(artistName, artistId).then((songs) => {
       this.props.setAppState({ songs, artistName });

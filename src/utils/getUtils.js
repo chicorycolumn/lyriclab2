@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const fetchArtists = (artistName) => {
-  let formattedArtistName = artistName.replace(/\s/g, "+");
+  const formattedArtistName = artistName.replace(/\s/g, "+");
 
   return axios
     .get(
