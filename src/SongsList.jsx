@@ -1,6 +1,10 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import styles from "./css/SongsList.module.css";
-import { fetchLyrics, fetchLyricsAsync } from "./utils/getUtils.js";
+import {
+  // fetchLyrics,
+  fetchLyricsAsync,
+} from "./utils/getUtils.js";
 import { convertMillisecondsToMinutes } from "./utils/formattingUtils.js";
 import LyricsModal from "./LyricsModal.jsx";
 
@@ -132,5 +136,10 @@ class SongsList extends Component {
     );
   }
 }
+
+SongsList.propTypes = {
+  songs: PropTypes.array.isRequired,
+  artistName: PropTypes.string,
+};
 
 export default SongsList;

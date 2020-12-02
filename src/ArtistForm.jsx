@@ -1,8 +1,9 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import {
-  fetchArtists,
+  // fetchArtists,
+  // fetchSongs,
   fetchArtistsAsync,
-  fetchSongs,
   fetchSongsAsync,
 } from "./utils/getUtils.js";
 import styles from "./css/ArtistForm.module.css";
@@ -105,5 +106,9 @@ class ArtistForm extends Component {
     );
   }
 }
+
+ArtistForm.propTypes = {
+  setAppState: PropTypes.func,
+};
 
 export default ArtistForm;

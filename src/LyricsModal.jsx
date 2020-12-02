@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import styles from "./css/LyricsModal.module.css";
 import spinnerStyles from "./css/spinnerStyles.module.css";
 
@@ -34,5 +35,11 @@ class LyricsModal extends Component {
     );
   }
 }
+
+LyricsModal.propTypes = {
+  loadingLyrics: PropTypes.bool.isRequired,
+  exitLyricsModal: PropTypes.func,
+  currentModal: PropTypes.object,
+};
 
 export default LyricsModal;
