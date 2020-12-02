@@ -6,6 +6,7 @@ import {
   fetchSongsAsync,
 } from "./utils/getUtils.js";
 import styles from "./css/ArtistForm.module.css";
+import spinnerStyles from "./css/spinnerStyles.module.css";
 
 class ArtistForm extends Component {
   state = {
@@ -65,30 +66,31 @@ class ArtistForm extends Component {
             Search artists
           </button>
         </form>
-        {this.state.submittedArtistName ? (
-          <p data-testid="artistNameFeedbackDisplay">{`Artist results for ${this.state.submittedArtistName}:`}</p>
-        ) : (
-          ""
-        )}
 
         {this.state.submittedArtistName &&
           (this.state.isLoading ? (
-            <p>loading</p>
+            <p data-testid="loadingText" className={spinnerStyles.loadingText}>
+              Loading...
+            </p>
           ) : this.state.artists.length ? (
-            <ul>
-              {this.state.artists.map((artist) => {
-                return (
-                  <li
-                    data-testid="artistResult"
-                    onClick={() => {
-                      this.handleArtistSelection(artist);
-                    }}
-                    className={`${styles.artistBox}`}
-                    key={`artist${artist.artistId}`}
-                  >{`${artist.artistName} (${artist.primaryGenreName})`}</li>
-                );
-              })}
-            </ul>
+            <>
+              {" "}
+              <p data-testid="artistNameFeedbackDisplay">{`Artist results for ${this.state.submittedArtistName}:`}</p>
+              <ul>
+                {this.state.artists.map((artist) => {
+                  return (
+                    <li
+                      data-testid="artistResult"
+                      onClick={() => {
+                        this.handleArtistSelection(artist);
+                      }}
+                      className={`${styles.artistBox}`}
+                      key={`artist${artist.artistId}`}
+                    >{`${artist.artistName} (${artist.primaryGenreName})`}</li>
+                  );
+                })}
+              </ul>
+            </>
           ) : (
             <p data-testid="artistNameFeedbackDisplay">
               No artists by the name {this.state.submittedArtistName} were found

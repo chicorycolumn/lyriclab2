@@ -1,22 +1,20 @@
 import React from "react";
-// import { rest } from "msw";
-// import { setupServer } from "msw/node";
-import { render, fireEvent, waitFor, screen } from "@testing-library/react";
+import {
+  render,
+  cleanup,
+  fireEvent,
+  waitFor,
+  screen,
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom/extend-expect";
 import ArtistForm from "../ArtistForm.jsx";
+import App from "../App.jsx";
+import axiosMock from "axios";
 
-// const server = setupServer(
-//   rest.get("/greeting", (req, res, ctx) => {
-//     return res(ctx.json({ greeting: "hello there" }));
-//   })
-// );
+afterEach(cleanup);
 
-// beforeAll(() => server.listen());
-// afterEach(() => server.resetHandlers());
-// afterAll(() => server.close());
-
-test("Unit test for basic functionality of Artist Submission input and button.", () => {
+test("Unit test for basic functionality of ArtistForm's input and button.", () => {
   render(<ArtistForm />);
   expect(screen.getByTestId("artistNameSubmitButton")).not.toHaveAttribute(
     "disabled"
@@ -26,40 +24,39 @@ test("Unit test for basic functionality of Artist Submission input and button.",
   expect(screen.getByTestId("artistNameInput")).toHaveValue(
     "all american rejects"
   );
-
-  //   fireEvent.click(screen.getByText("Load Greeting"));
-
-  //   await waitFor(() => screen.getByRole("heading"));
-
-  //   expect(screen.getByRole("heading")).toHaveTextContent("hello there");
-  //   expect(screen.getByRole("button")).toHaveAttribute("disabled");
 });
 
-test("Unit test for basic functionality of Artist Submission input and button.", () => {
-  render(<ArtistForm />);
-  expect(screen.getByTestId("artistNameSubmitButton")).not.toHaveAttribute(
-    "disabled"
+test("Unit test for whether ArtistForm fetches and displays data.", async () => {
+  axiosMock.get.mockResolvedValueOnce({
+    data: {
+      results: [
+        {
+          wrapperType: "artist",
+          artistType: "Artist",
+          artistName: "Red Hot Chili Peppers",
+          artistLinkUrl:
+            "https://music.apple.com/us/artist/red-hot-chili-peppers/889780?uo=4",
+          artistId: 889780,
+          amgArtistId: 5241,
+          primaryGenreName: "Alternative",
+          primaryGenreId: 20,
+        },
+      ],
+    },
+  });
+
+  const { getByTestId } = render(<App />);
+
+  userEvent.type(screen.getByTestId("artistNameInput"), "hot chilli");
+  userEvent.click(screen.getByTestId("artistNameSubmitButton"));
+
+  expect(getByTestId("loadingText")).toHaveTextContent("Loading...");
+
+  const resolvedResult = await waitFor(() => getByTestId("artistResult"));
+
+  expect(resolvedResult).toHaveTextContent(
+    "Red Hot Chili Peppers (Alternative)"
   );
 
-  userEvent.type(screen.getByTestId("artistNameInput"), "all american rejects");
-  expect(screen.getByTestId("artistNameInput")).toHaveValue(
-    "all american rejects"
-  );
-
-  //   fireEvent.click(screen.getByText("Load Greeting"));
-
-  //   await waitFor(() => screen.getByRole("heading"));
-
-  //   expect(screen.getByRole("heading")).toHaveTextContent("hello there");
-  //   expect(screen.getByRole("button")).toHaveAttribute("disabled");
+  expect(axiosMock.get).toHaveBeenCalledTimes(1);
 });
-
-// import React from "react";
-// import { render } from "@testing-library/react";
-// import ArtistForm from "../ArtistForm.jsx";
-
-// test("Renders component.", () => {
-//   const { getByTestId } = render(<ArtistForm />);
-//   const artistForm = getByTestId("artistForm");
-//   expect(artistForm).toBeDefined();
-// });
