@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styles from "./css/SongsList.module.css";
-import { fetchLyrics } from "./utils/getUtils.js";
+import { fetchLyrics, fetchLyricsAsync } from "./utils/getUtils.js";
 import { convertMillisecondsToMinutes } from "./utils/formattingUtils.js";
 import LyricsModal from "./LyricsModal.jsx";
 
@@ -37,7 +37,7 @@ class SongsList extends Component {
   showLyricsModal = (artistName, trackName) => {
     console.log("Will fetch lyrics for", { artistName, trackName });
 
-    fetchLyrics(artistName, trackName).then((lyrics) => {
+    fetchLyricsAsync(artistName, trackName).then((lyrics) => {
       console.log("Lyrics came back as", { lyrics });
       this.setState({ lyrics, currentModal: { artistName, trackName } });
     });
