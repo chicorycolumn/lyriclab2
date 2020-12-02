@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styles from "./css/LyricsModal.module.css";
+import spinnerStyles from "./css/spinnerStyles.module.css";
 
 class LyricsModal extends Component {
   render() {
@@ -14,7 +15,7 @@ class LyricsModal extends Component {
           </button>
           <div className={`${styles.innerModal}`}>
             {this.props.loadingLyrics ? (
-              "Loading..."
+              <p className={spinnerStyles.loadingText}>Loading...</p>
             ) : this.props.currentModal.lyrics.length ? (
               <>
                 <h1>{`${this.props.currentModal.trackName} by ${this.props.currentModal.artistName}`}</h1>
@@ -25,7 +26,7 @@ class LyricsModal extends Component {
                   })}
               </>
             ) : (
-              "No lyrics found."
+              <p className={spinnerStyles.errorText}>No lyrics found.</p>
             )}
           </div>
         </div>

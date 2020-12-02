@@ -1,4 +1,11 @@
 .loadingText {
   color: blue;
   font-weight: bold;
+  margin-top: 20px;
+}
+
+.errorText {
+  color: darkred;
+  font-weight: bold;
+  margin-top: 20px;
 }
