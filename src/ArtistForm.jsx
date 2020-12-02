@@ -52,7 +52,7 @@ class ArtistForm extends Component {
 
   render() {
     return (
-      <div>
+      <div data-testid="artistForm">
         <form onSubmit={this.handleSubmitForm}>
           <input
             data-testid="artistNameInput"

@@ -24,7 +24,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Testing
 
-Run the command `npm run cy`. This will bring up the testing window. From here you can click the test files, and the tests should automatically run and show you the results.
+To test with Cypress, run the command `npm run cy`. This will bring up the testing window. From here you can click the test files, and the tests should automatically run and show you the results.
+
+To test with React Testing Library via Jest, run the command `npm test`. The tests should automatically run and show you the results.
 
 ## Built with
 
