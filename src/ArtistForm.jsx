@@ -13,7 +13,7 @@ class ArtistForm extends Component {
     artistName: "",
     submittedArtistName: "",
     artists: [],
-    isLoading: false,
+    loadingArtists: false,
   };
 
   handleFormChange = (event) => {
@@ -28,25 +28,28 @@ class ArtistForm extends Component {
     this.setState({
       artistName: "",
       submittedArtistName: artistName,
-      isLoading: true,
+      loadingArtists: true,
     });
 
     fetchArtistsAsync(artistName).then((artists) => {
-      this.setState({ isLoading: false, artists });
+      this.setState({ loadingArtists: false, artists });
       this.props.setAppState({ songs: [] });
     });
   };
 
   handleArtistSelection = (artist) => {
+    this.setState({ loadingSongs: true });
+
     const { artistName, artistId } = artist;
 
     fetchSongsAsync(artistName, artistId).then((songs) => {
-      this.props.setAppState({ songs, artistName });
+      this.props.setAppState({ songs, artistName, loadingSongs: false });
       this.setState({
         artistName: "",
         submittedArtistName: "",
         artists: [],
-        isLoading: false,
+        loadingArtists: false,
+        loadingSongs: false,
       });
     });
   };
@@ -68,13 +71,15 @@ class ArtistForm extends Component {
         </form>
 
         {this.state.submittedArtistName &&
-          (this.state.isLoading ? (
-            <p data-testid="loadingText" className={spinnerStyles.loadingText}>
+          (this.state.loadingArtists || this.state.loadingSongs ? (
+            <p
+              data-testid="loadingArtistsText"
+              className={spinnerStyles.loadingText}
+            >
               Loading...
             </p>
           ) : this.state.artists.length ? (
             <>
-              {" "}
               <p data-testid="artistNameFeedbackDisplay">{`Artist results for ${this.state.submittedArtistName}:`}</p>
               <ul>
                 {this.state.artists.map((artist) => {

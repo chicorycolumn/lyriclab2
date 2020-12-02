@@ -50,7 +50,7 @@ test("Unit test for whether ArtistForm fetches and displays data.", async () => 
   userEvent.type(screen.getByTestId("artistNameInput"), "hot chilli");
   userEvent.click(screen.getByTestId("artistNameSubmitButton"));
 
-  expect(getByTestId("loadingText")).toHaveTextContent("Loading...");
+  expect(getByTestId("loadingArtistsText")).toHaveTextContent("Loading...");
 
   const resolvedResult = await waitFor(() => getByTestId("artistResult"));
 

@@ -5,6 +5,11 @@
 .AppLogo {
   height: 75px;
   margin-right: 20px;
+  cursor: pointer;
+}
+
+.AppTitle {
+  cursor: pointer;
 }
 
 .AppHeader {

@@ -8,8 +8,8 @@ class SongsList extends Component {
   state = {
     songs: [],
     currentlySortedBy: { key: "trackName", asc: true },
-    lyrics: "",
-    currentModal: { artistName: "", trackName: "" },
+    loadingLyrics: false,
+    currentModal: { artistName: "", trackName: "", lyrics: "" },
   };
 
   componentDidMount() {
@@ -37,16 +37,21 @@ class SongsList extends Component {
   showLyricsModal = (artistName, trackName) => {
     console.log("Will fetch lyrics for", { artistName, trackName });
 
+    this.setState({ showLyricsModal: true, loadingLyrics: true });
+
     fetchLyricsAsync(artistName, trackName).then((lyrics) => {
       console.log("Lyrics came back as", { lyrics });
-      this.setState({ lyrics, currentModal: { artistName, trackName } });
+      this.setState({
+        loadingLyrics: false,
+        currentModal: { artistName, trackName, lyrics },
+      });
     });
   };
 
   exitLyricsModal = () => {
     this.setState({
-      lyrics: "",
-      currentModal: { artistName: "", trackName: "" },
+      showLyricsModal: false,
+      currentModal: { artistName: "", trackName: "", lyrics: "" },
     });
   };
 
@@ -62,11 +67,11 @@ class SongsList extends Component {
   render() {
     return (
       <div className={`${styles.mainDiv}`}>
-        {this.state.lyrics.length ? (
+        {this.state.showLyricsModal ? (
           <LyricsModal
-            lyrics={this.state.lyrics}
             exitLyricsModal={this.exitLyricsModal}
             currentModal={this.state.currentModal}
+            loadingLyrics={this.state.loadingLyrics}
           />
         ) : (
           ""
