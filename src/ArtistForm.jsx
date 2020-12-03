@@ -17,11 +17,30 @@ class ArtistForm extends Component {
     loadingArtists: false,
   };
 
+  componentDidMount() {
+    this._isMounted = true;
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
   handleFormChange = (event) => {
-    this.setState({ artistName: event.target.value, submittedArtistName: "" });
+    if (!this._isMounted) {
+      return;
+    }
+
+    this.setState({
+      artistName: event.target.value,
+      submittedArtistName: "",
+    });
   };
 
   handleSubmitForm = (event) => {
+    if (!this._isMounted) {
+      return;
+    }
+
     event.preventDefault();
 
     const { artistName } = this.state;
@@ -33,17 +52,27 @@ class ArtistForm extends Component {
     });
 
     fetchArtistsAsync(artistName).then((artists) => {
+      if (!this._isMounted) {
+        return;
+      }
       this.setState({ loadingArtists: false, artists });
       this.props.setAppState({ songs: [] });
     });
   };
 
   handleArtistSelection = (artist) => {
+    if (!this._isMounted) {
+      return;
+    }
+
     this.setState({ loadingSongs: true });
 
     const { artistName, artistId } = artist;
 
     fetchSongsAsync(artistName, artistId).then((songs) => {
+      if (!this._isMounted) {
+        return;
+      }
       this.props.setAppState({ songs, artistName, loadingSongs: false });
       this.setState({
         artistName: "",
