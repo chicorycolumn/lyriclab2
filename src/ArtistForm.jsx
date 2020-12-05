@@ -87,7 +87,7 @@ class ArtistForm extends Component {
   render() {
     return (
       <div data-testid="artistForm">
-        <form onSubmit={this.handleSubmitForm}>
+        <form className={styles.form} onSubmit={this.handleSubmitForm}>
           <input
             data-testid="artistNameInput"
             onChange={this.handleFormChange}
